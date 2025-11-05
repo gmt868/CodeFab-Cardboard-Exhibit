@@ -1,3 +1,9 @@
+/*
+links:
+https://docs.google.com/document/d/1xu1s7ETIvXv-xM5eTEjM3SjmA8OhjFZcTrPk5zAdnjc/edit?usp=sharing
+https://docs.google.com/document/d/1qDWI8m5Ya1d1RBkaInElKuwcMyZvqMT5liPwhDtG_Zs/edit?usp=sharing
+*/
+
 #include <Servo.h> //include servo library
 
 // define pin numbers
