@@ -24,9 +24,18 @@ void setup() {
 }
 void loop() {
 //Scene 1:
-  
-
-
+  //Add code to read copper tape connections along the rail and turn on LEDs
+//Scene 2:
+  //Add code to retract mechanism with Six sprite after tug
+//Scene 3:
+  //Add code to set the ultrasonic sensor to detect nearby hands and crumple Thin Man
+//Scene 4:
+  //Add code to detect some sorta connection with the mallet and music box to stop music and flip the Six sprite
+//Scene 5:
+  //Add code to release Mono from the bridge using some mechanism
+//Scene 6:
+  //Add code to turn off the light from the bottom floor of the tower after connection with the chair and turn on 
+  //consecutive lights every few seconds
 
 }
 
