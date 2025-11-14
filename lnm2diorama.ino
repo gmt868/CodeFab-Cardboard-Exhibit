@@ -9,8 +9,11 @@ https://docs.google.com/document/d/1qDWI8m5Ya1d1RBkaInElKuwcMyZvqMT5liPwhDtG_Zs/
 // define pin numbers
 const int trigPin = 11;
 const int echoPin = 12;
-
-const int 
+const int scene1SwitchPin = 2;
+const int scene1LightPin = 3;
+const int scene2ServoPin = 8;
+const int scene2SwitchPin = 5; // pin for switch in scene 2
+const int scene3;
 
 // defines variables
 long duration;
