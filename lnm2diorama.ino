@@ -5,19 +5,20 @@ https://docs.google.com/document/d/1qDWI8m5Ya1d1RBkaInElKuwcMyZvqMT5liPwhDtG_Zs/
 */
 
 #include <Servo.h> //include servo library
+#include <HCSR04.h> //include Ultrasonic sensor library
 
-// define pin numbers
-const int trigPin = 11;
-const int echoPin = 12;
-const int scene1SwitchPin = 2;
-const int scene1LightPin = 3;
-const int scene2ServoPin = 8;
-const int scene2SwitchPin = 5; // pin for switch in scene 2
-const int scene3;
 
-// defines variables
-long duration;
-int distance;
+// define pin numbers (scenes)
+const int s1SwitchPin = 2; //scene 1 switch
+const int s1LEDPin = 3;    //scene 1 LED pin
+
+const int s2ServoPin = 4;  //scene 2 servo signal pin 
+const int s2SwitchPin = 5; //scene 2 switch pin
+
+const int trigPin = 11;    //scene 3 trig pin (ultrasonic)
+const int echoPin = 12;    //scene 3 echo pin (ultrasonic)
+UltraSonicDistanceSensor s3DistSensor(trigPin, echoPin);
+
 
 void setup() {
   pinMode(trigPin, OUTPUT); // Sets the trigPin as an Output
@@ -40,21 +41,4 @@ void loop() {
   //Add code to turn off the light from the bottom floor of the tower after connection with the chair and turn on 
   //consecutive lights every few seconds
 
-}
-
-
-
-int distance() { //ultrasonic function
-  // Clears the trigPin
-  digitalWrite(trigPin, LOW);
-  delayMicroseconds(2);
-  // Sets the trigPin on HIGH state for 10 micro seconds
-  digitalWrite(trigPin, HIGH);
-  delayMicroseconds(10);
-  digitalWrite(trigPin, LOW);
-  // Reads the echoPin, returns the sound wave travel time in microseconds
-  duration = pulseIn(echoPin, HIGH);
-  // Calculating the distance
-  distance = duration * 0.034 / 2;
-  // Prints the distance on the Serial Monitor
 }
