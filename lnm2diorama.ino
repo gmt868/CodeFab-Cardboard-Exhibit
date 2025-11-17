@@ -4,26 +4,43 @@ https://docs.google.com/document/d/1xu1s7ETIvXv-xM5eTEjM3SjmA8OhjFZcTrPk5zAdnjc/
 https://docs.google.com/document/d/1qDWI8m5Ya1d1RBkaInElKuwcMyZvqMT5liPwhDtG_Zs/edit?usp=sharing
 */
 
+//INCLUDE LIBRARIES
 #include <Servo.h> //include servo library
 #include <HCSR04.h> //include Ultrasonic sensor library
 
 
-// define pin numbers (scenes)
-const int s1SwitchPin = 2; //scene 1 switch
-const int s1LEDPin = 3;    //scene 1 LED pin
-
-const int s2ServoPin = 4;  //scene 2 servo signal pin 
-const int s2SwitchPin = 5; //scene 2 switch pin
-
-const int trigPin = 11;    //scene 3 trig pin (ultrasonic)
-const int echoPin = 12;    //scene 3 echo pin (ultrasonic)
-UltraSonicDistanceSensor s3DistSensor(trigPin, echoPin);
+// define pin numbers and declare  (scenes)
+  //Scene 1
+    const int s1SwitchPin = 2; //scene 1 switch
+    const int s1LEDPin = 3;    //scene 1 LED pin
+  //Scene 2
+    Servo s2Servo;  //declares scene 2 servo, WILL ATTACH TO PIN 4
+    const int s2SwitchPin = 5; //scene 2 switch pin
+  //Scene 3
+    const int trigPin = 6;    //scene 3 trig pin (ultrasonic)
+    const int echoPin = 7;    //scene 3 echo pin (ultrasonic)
+    UltraSonicDistanceSensor s3DistSensor(trigPin, echoPin); //declaring the sensor with trig and echo pins
+    Servo s3Servo; //declares scene 3 servo, WILL ATTACH TO PIN 8
 
 
 void setup() {
-  pinMode(trigPin, OUTPUT); // Sets the trigPin as an Output
-  pinMode(echoPin, INPUT); // Sets the echoPin as an Input
-  Serial.begin(9600); // Starts the serial communication
+
+  //Setup scene 1
+    pinMode(s1SwitchPin, INPUT);
+    pinMode(s1LEDPin, OUTPUT);
+
+  //Setup scene 2
+    pinMode(s2SwitchPin, INPUT);
+    s2Servo.attach(4); //attaches s2Servo to pin 4
+
+  //Setup scene 3
+    s3Servo.attach(8);
+    //Setup Ultrasonic
+      pinMode(trigPin, OUTPUT); // Sets the trigPin as an Output
+      pinMode(echoPin, INPUT); // Sets the echoPin as an Input
+
+  //Setup serial monitor for debug 
+    Serial.begin(9600); // Starts the serial communication
 
 }
 void loop() {
