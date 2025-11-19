@@ -14,14 +14,24 @@ https://docs.google.com/document/d/1qDWI8m5Ya1d1RBkaInElKuwcMyZvqMT5liPwhDtG_Zs/
     const int s1SwitchPin = 2; //scene 1 switch
     const int s1LEDPin = 3;    //scene 1 LED pin
   //Scene 2
-    Servo s2Servo;  //declares scene 2 servo, WILL ATTACH TO PIN 4
+    Servo s2Servo;  //declares scene 2 servo (180), WILL ATTACH TO PIN 4
     const int s2SwitchPin = 5; //scene 2 switch pin
   //Scene 3
     const int trigPin = 6;    //scene 3 trig pin (ultrasonic)
     const int echoPin = 7;    //scene 3 echo pin (ultrasonic)
     UltraSonicDistanceSensor s3DistSensor(trigPin, echoPin); //declaring the sensor with trig and echo pins
-    Servo s3Servo; //declares scene 3 servo, WILL ATTACH TO PIN 8
-
+    Servo s3Servo; //declares scene 3 servo (360), WILL ATTACH TO PIN 8
+  //Scene 4
+    const int s4DialPin = A0; //scene 4 potentiometer to Analog pin 0
+    Servo s4Servo; //declares scene 3 servo (180), WILL ATTACH TO PIN 9
+  //Scene 5 has no circuitry, thank goodness
+  //Scene 6
+    const int s6SwitchPin = 10; //scene 6 switch pin
+    //LED Pinz
+    const int s6LEDPin1 = 11;
+    const int s6LEDPin2 = 12;
+    const int s6LEDPin3 = 13;
+    const int s6LEDPin4 = A1;
 
 void setup() {
 
@@ -39,6 +49,17 @@ void setup() {
       pinMode(trigPin, OUTPUT); // Sets the trigPin as an Output
       pinMode(echoPin, INPUT); // Sets the echoPin as an Input
 
+  //Setup scene 4
+    //Dont need to declare analog pin for potentiometer
+    s4Servo.attach(9);
+
+  //Setup scene 6
+    pinMode(s6SwitchPin, INPUT);
+    pinMode(s6LEDPin1, OUTPUT);
+    pinMode(s6LEDPin1, OUTPUT);
+    pinMode(s6LEDPin1, OUTPUT);
+    pinMode(s6LEDPin1, OUTPUT);
+
   //Setup serial monitor for debug 
     Serial.begin(9600); // Starts the serial communication
 
@@ -46,6 +67,7 @@ void setup() {
 void loop() {
 //Scene 1:
   //Add code to read copper tape connections along the rail and turn on LEDs
+  
 //Scene 2:
   //Add code to retract mechanism with Six sprite after tug
 //Scene 3:
