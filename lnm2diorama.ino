@@ -67,9 +67,18 @@ void setup() {
 void loop() {
 //Scene 1:
   //Add code to read copper tape connections along the rail and turn on LEDs
-  
+   if (digitalRead(s1SwitchPin) == HIGH){
+    digitalWrite(s1LEDPin, HIGH);
+  } else {
+    digitalWrite(s1LEDPin, LOW);
+  }
+
 //Scene 2:
   //Add code to retract mechanism with Six sprite after tug
+  if (digitalRead(s2SwitchPin) == HIGH){
+  } else {
+    digitalWrite(s1LEDPin, LOW);
+  }
 //Scene 3:
   //Add code to set the ultrasonic sensor to detect nearby hands and crumple Thin Man
 //Scene 4:
