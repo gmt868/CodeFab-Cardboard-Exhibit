@@ -33,6 +33,11 @@ https://docs.google.com/document/d/1qDWI8m5Ya1d1RBkaInElKuwcMyZvqMT5liPwhDtG_Zs/
     const int s6LEDPin3 = 13;
     const int s6LEDPin4 = A1;
 
+//Scene 3 Timer
+unsigned long currentTime;
+unsigned long previousTime = 0;
+int timerLength = 2000;
+
 void setup() {
 
   //Setup scene 1
@@ -42,12 +47,10 @@ void setup() {
   //Setup scene 2
     pinMode(s2SwitchPin, INPUT);
     s2Servo.attach(4); //attaches s2Servo to pin 4
-
+    s2Servo.write(90);
   //Setup scene 3
     s3Servo.attach(8);
-    //Setup Ultrasonic
-      pinMode(trigPin, OUTPUT); // Sets the trigPin as an Output
-      pinMode(echoPin, INPUT); // Sets the echoPin as an Input
+    //Ultrasonic sensor set up earlier
 
   //Setup scene 4
     //Dont need to declare analog pin for potentiometer
@@ -76,17 +79,55 @@ void loop() {
 //Scene 2:
   //Add code to retract mechanism with Six sprite after tug
   if (digitalRead(s2SwitchPin) == HIGH){
-  } else {
-    digitalWrite(s1LEDPin, LOW);
+    s2Servo.write(125);
+    delay(3000);
+    s2Servo.write(55);
   }
+
 //Scene 3:
   //Add code to set the ultrasonic sensor to detect nearby hands and crumple Thin Man
+  /*
+    float handDist = s3DistSensor.measureDistanceCm();
+    if(handDist < 10) {
+      s3Servo.write(0);
+      delay(2000);
+      s3Servo(90);
+    }
+    delay(100);
+  */
 //Scene 4:
-  //Add code to detect some sorta connection with the mallet and music box to stop music and flip the Six sprite
+  //Add code to detect potentiometer (mallet swinging to hit music box) and output a 180 degree turn (flips around Six sprite)
+  /*
+    if(analogRead(s4DialPin) < [indeterminate value that I will find through testing]) {
+      s4Servo.write(180);
+    } else {
+      s4Servo.write(0);
+    }
+  */
+
 //Scene 5:
-  //Add code to release Mono from the bridge using some mechanism
+  //imagine coding lmfao
+
 //Scene 6:
-  //Add code to turn off the light from the bottom floor of the tower after connection with the chair and turn on 
-  //consecutive lights every few seconds
+  //Add code to turn off the light from the bottom floor of the tower after connection with the chair and turn on consecutive lights every few seconds
+  if(digitalRead(s6SwitchPin == HIGH)) {
+    delay(200);
+    digitalWrite(s6LEDPin1, HIGH);
+    delay(2000);
+    digitalWrite(s6LEDPin1, LOW);
+    delay(2300);
+    digitalWrite(s6LEDPin2, HIGH);
+    delay(2000);
+    digitalWrite(s6LEDPin2, LOW);
+    delay(2300);
+    digitalWrite(s6LEDPin3, HIGH);
+    delay(2000);
+    digitalWrite(s6LEDPin3, LOW);
+    delay(2300);
+    digitalWrite(s6LEDPin4, HIGH);
+    delay(2000);
+    digitalWrite(s6LEDPin4, LOW);
+    delay(2300);
+  }
 
 }
