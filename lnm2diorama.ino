@@ -77,7 +77,7 @@ void loop() {
   }
 
 //Scene 2:
-  //Add code to retract mechanism with Six sprite after tug
+  //Add code to retract mechanism with Six sprite after tug (more copper tape)
   if (digitalRead(s2SwitchPin) == HIGH){
     s2Servo.write(125);
     delay(3000);
@@ -110,7 +110,7 @@ void loop() {
 
 //Scene 6:
   //Add code to turn off the light from the bottom floor of the tower after connection with the chair and turn on consecutive lights every few seconds
-  if(digitalRead(s6SwitchPin == HIGH)) {
+  if(digitalRead(s6SwitchPin) = HIGH) {
     delay(200);
     digitalWrite(s6LEDPin1, HIGH);
     delay(2000);
