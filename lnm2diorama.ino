@@ -16,6 +16,7 @@ https://docs.google.com/document/d/1qDWI8m5Ya1d1RBkaInElKuwcMyZvqMT5liPwhDtG_Zs/
   //Scene 2
     Servo s2Servo;  //declares scene 2 servo (180), WILL ATTACH TO PIN 4
     const int s2SwitchPin = 5; //scene 2 switch pin
+    bool s2StateChange = true; //state change detection, so that scene 2 code doesnt repeat endlessly
   //Scene 3
     const int trigPin = 6;    //scene 3 trig pin (ultrasonic)
     const int echoPin = 7;    //scene 3 echo pin (ultrasonic)
@@ -55,6 +56,7 @@ void setup() {
   //Setup scene 4
     //Dont need to declare analog pin for potentiometer
     s4Servo.attach(9);
+    s4Servo.write(0);
 
   //Setup scene 6
     pinMode(s6SwitchPin, INPUT);
@@ -79,38 +81,45 @@ void loop() {
 //Scene 2:
   //Add code to retract mechanism with Six sprite after tug (more copper tape)
   if (digitalRead(s2SwitchPin) == HIGH){
+    s2StateChange = false;
     s2Servo.write(125);
     delay(3000);
-    s2Servo.write(55);
+    s2Servo.write(50);
+  } else {
+    s2StateChange = true;
   }
 
 //Scene 3:
   //Add code to set the ultrasonic sensor to detect nearby hands and crumple Thin Man
-  /*
-    float handDist = s3DistSensor.measureDistanceCm();
-    if(handDist < 10) {
-      s3Servo.write(0);
-      delay(2000);
-      s3Servo(90);
-    }
-    delay(100);
-  */
+  float handDist = s3DistSensor.measureDistanceCm();
+  bool s3Status = false; //checker to see if scene 3 has already been activated so that 360 servo does not burn out
+  //Serial.println(handDist); (debug)
+  if(handDist < 12 && handDist >= 0 && s3Status == false) {
+    s3Status = true;
+    s3Servo.write(0);
+    delay(1000);
+    s3Servo.write(180);
+    delay(1000);
+    s3Servo.write(90);
+  }
+  delay(75); //buffer time inbetween ultrasonic reads
+
 //Scene 4:
-  //Add code to detect potentiometer (mallet swinging to hit music box) and output a 180 degree turn (flips around Six sprite)
-  /*
-    if(analogRead(s4DialPin) < [indeterminate value that I will find through testing]) {
-      s4Servo.write(180);
-    } else {
+  //Detect potentiometer (mallet swinging to hit music box) and output a 180 degree turn (flips around Six sprite)
+  float dialVal = analogRead(s4DialPin);
+  Serial.println(dialVal);
+    if(analogRead(s4DialPin) < 400) {
       s4Servo.write(0);
+    } else {
+      s4Servo.write(180);
     }
-  */
 
 //Scene 5:
   //imagine coding lmfao
 
 //Scene 6:
   //Add code to turn off the light from the bottom floor of the tower after connection with the chair and turn on consecutive lights every few seconds
-  if(digitalRead(s6SwitchPin) = HIGH) {
+  if(digitalRead(s6SwitchPin) == HIGH) {
     delay(200);
     digitalWrite(s6LEDPin1, HIGH);
     delay(2000);
