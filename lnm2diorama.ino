@@ -74,6 +74,13 @@ void loop() {
   //Add code to read copper tape connections along the rail and turn on LEDs
    if (digitalRead(s1SwitchPin) == HIGH){
     digitalWrite(s1LEDPin, HIGH);
+    delay(450);
+    digitalWrite(s1LEDPin, LOW);
+    delay(600);
+    digitalWrite(s1LEDPin, HIGH);
+    delay(800);
+    digitalWrite(s1LEDPin, LOW);
+    delay(1300);
   } else {
     digitalWrite(s1LEDPin, LOW);
   }
@@ -83,7 +90,7 @@ void loop() {
   if (digitalRead(s2SwitchPin) == HIGH){
     s2StateChange = false;
     s2Servo.write(125);
-    delay(3000);
+    delay(2000);
     s2Servo.write(50);
   } else {
     s2StateChange = true;
@@ -107,7 +114,7 @@ void loop() {
 //Scene 4:
   //Detect potentiometer (mallet swinging to hit music box) and output a 180 degree turn (flips around Six sprite)
   float dialVal = analogRead(s4DialPin);
-  Serial.println(dialVal);
+  //Serial.println(dialVal);
     if(analogRead(s4DialPin) < 400) {
       s4Servo.write(0);
     } else {
@@ -121,22 +128,23 @@ void loop() {
   //Add code to turn off the light from the bottom floor of the tower after connection with the chair and turn on consecutive lights every few seconds
   if(digitalRead(s6SwitchPin) == HIGH) {
     delay(200);
-    digitalWrite(s6LEDPin1, HIGH);
-    delay(2000);
-    digitalWrite(s6LEDPin1, LOW);
-    delay(2300);
-    digitalWrite(s6LEDPin2, HIGH);
-    delay(2000);
-    digitalWrite(s6LEDPin2, LOW);
-    delay(2300);
-    digitalWrite(s6LEDPin3, HIGH);
-    delay(2000);
     digitalWrite(s6LEDPin3, LOW);
-    delay(2300);
+    delay(1000);
     digitalWrite(s6LEDPin4, HIGH);
     delay(2000);
     digitalWrite(s6LEDPin4, LOW);
-    delay(2300);
+    delay(1000);
+    digitalWrite(s6LEDPin2, HIGH);
+    delay(2000);
+    digitalWrite(s6LEDPin2, LOW);
+    delay(1000);
+    digitalWrite(s6LEDPin1, HIGH);
+    delay(3000);
+    digitalWrite(s6LEDPin1, LOW);
+    delay(1000);
+    
+    Serial.println(s6SwitchPin);
+  } else {
+    digitalWrite(s6LEDPin3, HIGH);
   }
-
 }
